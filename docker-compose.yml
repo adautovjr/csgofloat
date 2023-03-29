@@ -1,0 +1,26 @@
+volumes:
+  floatcachebot:
+
+services:
+  csgofloat:
+    image: step7750/csgofloat:master
+    container_name: csgofloat
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ~/Documents/projects/personal/csgofloat/config:/config:rw
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15.1
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "5433:5432"
+    volumes:
+      - floatcachebot:/var/lib/postgresql/data
+    container_name: floatcachebot
