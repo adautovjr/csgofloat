@@ -9,7 +9,7 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ~/Documents/projects/personal/csgofloat/config:/config:rw
+      - ./config:/config:rw
     depends_on:
       - postgres
 
